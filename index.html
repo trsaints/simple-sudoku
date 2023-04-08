@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Simple Sudoku</title>
+  </head>
+  <body>
+    <main>
+      <h1>Bem-vindo</h1>
+
+      <menu data-element="main-options">
+        <p>O que deseja fazer?</p>
+
+        <button data-element="show" type="button">Novo Jogo</button>
+        <button data-element="list" type="button">Histórico</button>
+      </menu>
+
+      <article data-element="game">
+        <h2 data-element="difficulty">Dificuldade:</h2>
+
+        <output data-element="timer"></output>
+
+        <menu data-element="game-options">
+          <button data-element="validate" type="button">Validar Jogo</button>
+          <button data-element="reset" type="button">Reiniciar Jogo</button>
+          <button data-element="quit" type="button">Desistir</button>
+        </menu>
+
+        <table data-element="grid"></table>
+      </article>
+
+      <section data-element="history">
+        <h2>Histórico</h2>
+
+        <menu data-element="history-options"></menu>
+
+        <table data-element="history-table"></table>
+      </section>
+    </main>
+
+    <footer>
+      <h2>Simple Sudoku ─ 2023</h2>
+
+      <p>
+        Feito por
+        <a
+          target="_blank"
+          rel="noopener"
+          href="https://github.com/trsaints/simple-sudoku/"
+          >@trsaints</a
+        >
+      </p>
+    </footer>
+
+    <script src="./app/src/app.js" type="module"></script>
+  </body>
+</html>
