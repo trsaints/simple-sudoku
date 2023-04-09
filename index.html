@@ -3,34 +3,74 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./app/styles/style.css" />
     <title>Simple Sudoku</title>
   </head>
   <body>
-    <main>
-      <h1>Bem-vindo</h1>
+    <main class="main">
+      <h1 class="main__title">Bem-vindo</h1>
 
-      <menu data-element="main-options">
-        <p>O que deseja fazer?</p>
+      <menu data-element="main-options" class="main__options">
+        <p class="option__desc">O que deseja fazer?</p>
 
-        <button data-element="show" type="button">Novo Jogo</button>
-        <button data-element="list" type="button">Histórico</button>
+        <button data-element="show" type="button" class="options_btn">
+          Novo Jogo
+        </button>
+
+        <button data-element="list" type="button" class="options_btn">
+          Histórico
+        </button>
       </menu>
 
-      <article data-element="game">
-        <h2 data-element="difficulty">Dificuldade:</h2>
+      <dialog data-element="game-dialog" class="main__dialog hidden">
+        <form data-element="game-form" novalidate class="dialog__form">
+          <fieldset class="form__fieldset">
+            <legend class="fieldset__title">Opções de Jogo</legend>
 
-        <output data-element="timer"></output>
+            <label for="difficulty" class="fieldset__label">Dificuldade:</label>
 
-        <menu data-element="game-options">
-          <button data-element="validate" type="button">Validar Jogo</button>
-          <button data-element="reset" type="button">Reiniciar Jogo</button>
-          <button data-element="quit" type="button">Desistir</button>
+            <select name="difficulty" id="difficulty" class="fieldset__input">
+              <option selected value="easy">Fácil</option>
+
+              <option value="medium">Média</option>
+
+              <option value="hard">Difícil</option>
+            </select>
+          </fieldset>
+
+          <button data-element="start" type="submit" class="form__submit">
+            Começar
+          </button>
+        </form>
+      </dialog>
+
+      <article data-element="game" class="main__game hidden">
+        <output data-element="timer" class="game__timer"></output>
+
+        <menu data-element="game-options" class="game__options">
+          <button data-element="validate" type="button" class="option__btn">
+            Validar Jogo
+          </button>
+
+          <button data-element="reset" type="button" class="option__btn">
+            Reiniciar Jogo
+          </button>
+
+          <button data-element="quit" type="button" class="option__btn">
+            Desistir
+          </button>
         </menu>
 
-        <table data-element="grid"></table>
+        <table data-element="grid" class="game__grid">
+          <caption data-element="grid-difficulty" class="grid__mode">
+            Dificuldade:
+          </caption>
+
+          <tbody data-element="grid-content" class="grid__body"></tbody>
+        </table>
       </article>
 
-      <section data-element="history">
+      <section data-element="history" class="hidden">
         <h2>Histórico</h2>
 
         <menu data-element="history-options"></menu>

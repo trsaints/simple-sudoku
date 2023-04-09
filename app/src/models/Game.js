@@ -1,7 +1,8 @@
 import Grid from "./Grid.js";
 
 export default class Game {
-  status = "";
+  #status = "";
+  #timeElapsed = 0;
   #difficulty = {
     easy: 24,
     medium: 48,
@@ -9,8 +10,44 @@ export default class Game {
   };
   #grid;
 
+  get startCounter() {
+    return this.#startCounter;
+  }
+
+  get endCounter() {
+    return this.#endCounter;
+  }
+
+  get setStatus() {
+    return this.#setStatus;
+  }
+
+  #setStatus(status) {
+    this.#status = status;
+  }
+
+  #startCounter() {
+    setInterval(this.#countTime, 1000);
+  }
+
+  #countTime() {
+    this.#timeElapsed += 1000;
+  }
+
+  #endCounter() {
+    clearInterval(this.#countTime);
+  }
+
   get grid() {
-    return this.#grid
+    return this.#grid;
+  }
+
+  get status() {
+    return this.#status;
+  }
+
+  get timeElapsed() {
+    return this.#timeElapsed;
   }
 
   constructor(mode) {

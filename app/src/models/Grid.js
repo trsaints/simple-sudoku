@@ -65,9 +65,6 @@ export default class Grid {
     }
 
     this.#removeNumbers(mode);
-
-    console.table(this.#frames);
-    console.table(this.#editableFrames);
   }
 
   #setFrames() {

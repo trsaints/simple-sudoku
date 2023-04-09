@@ -1,0 +1,14 @@
+.hidden {
+  display: none;
+}
+
+.game__grid {
+  border-collapse: collapse;
+}
+
+.body__cell {
+  width: 24px;
+  height: 24px;
+  padding: 8px;
+  border: 1px solid;
+}
