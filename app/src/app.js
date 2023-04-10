@@ -1,4 +1,4 @@
-import initalize from "./controller/controller.js";
+import initialize from "./controller/controller.js";
 import Game from "./models/Game.js";
 import Sudoku from "./components/Sudoku.js";
 import { startGame } from "./services/game_service.js";
@@ -26,4 +26,4 @@ const deps = {
   database: {},
 };
 
-initalize(deps);
+initialize(deps);

@@ -11,14 +11,24 @@ export default class Sudoku {
 
       row.map((col) => {
         const cell = new DOMElement("td", ["body__cell"]);
+        const input = new DOMElement("input", ["cell__input"]);
 
-        cell.setAttribute(
+        input.setAttribute("type", "tel");
+        input.setAttribute("pattern", "[1-9]{1}");
+
+        input.setAttribute(
           "data-cell",
           `${row.indexOf(col)}-${editableFrames.indexOf(row)}`
         );
 
-        cell.textContent = col === null ? " " : col;
+        if (col !== null) {
+          input.setAttribute("readonly", "");
+          input.classList.add("filled");
+        }
 
+        input.value = col === null ? " " : col;
+
+        cell.appendChild(input);
         tr.appendChild(cell);
       });
 

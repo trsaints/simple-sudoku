@@ -2,13 +2,14 @@ import Grid from "./Grid.js";
 
 export default class Game {
   #status = "";
-  #timeElapsed = 0;
-  #difficulty = {
+  timeElapsed = 0;
+  #mode = {
     easy: 24,
     medium: 48,
     hard: 56,
   };
   #grid;
+  #difficulty = "";
 
   get startCounter() {
     return this.#startCounter;
@@ -31,7 +32,7 @@ export default class Game {
   }
 
   #countTime() {
-    this.#timeElapsed += 1000;
+    this.timeElapsed += 1000;
   }
 
   #endCounter() {
@@ -42,15 +43,20 @@ export default class Game {
     return this.#grid;
   }
 
+  get difficulty() {
+    return this.#difficulty;
+  }
+
   get status() {
     return this.#status;
   }
 
   get timeElapsed() {
-    return this.#timeElapsed;
+    return this.timeElapsed;
   }
 
   constructor(mode) {
-    this.#grid = new Grid(this.#difficulty[mode]);
+    this.#grid = new Grid(this.#mode[mode]);
+    this.#difficulty = mode;
   }
 }
