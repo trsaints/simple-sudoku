@@ -1,6 +1,7 @@
 export function renderGame({ callbacks, components, game }) {
   const grid = callbacks.getElement("grid-content"),
-    difficulty = callbacks.getElement("grid-difficulty");
+    difficulty = callbacks.getElement("grid-difficulty"),
+    validator = callbacks.getElement("validate");
 
   const { Sudoku } = components;
 

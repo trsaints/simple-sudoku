@@ -26,7 +26,11 @@ export default class Grid {
   }
 
   #setNum(n, col, row) {
+    if (typeof n !== "number") return;
+
     this.#editableFrames[col][row] = n;
+    console.log(`Set ${n} at frame ${row} col ${col}`);
+    console.log(this.#editableFrames);
   }
 
   #removeNumbers(n) {
@@ -42,7 +46,7 @@ export default class Grid {
     // Set the corresponding elements to null
     for (const index of indices) {
       const [i, j] = index.split(",");
-      this.editableFrames[i][j] = null;
+      this.editableFrames[i][j] = `${i}-${j}`;
     }
   }
 
@@ -77,5 +81,7 @@ export default class Grid {
   constructor(n) {
     this.#setFrames();
     this.#fillFrames(n);
+
+    console.table(this.#editableFrames);
   }
 }
