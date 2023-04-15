@@ -2,6 +2,7 @@ export default class Grid {
   #range = [0, 1, 2, 3, 4, 5, 6, 7, 8];
   #frames = [];
   #editableFrames = [];
+  #editablePositions = [];
 
   get editableFrames() {
     return this.#editableFrames;
@@ -11,11 +12,11 @@ export default class Grid {
     return this.#setNum;
   }
 
-  get validate() {
-    return this.#validate;
+  get compare() {
+    return this.#compare;
   }
 
-  #validate() {
+  #compare() {
     return (
       JSON.stringify(this.#frames) === JSON.stringify(this.#editableFrames)
     );
@@ -25,12 +26,14 @@ export default class Grid {
     return Math.floor(Math.random() * this.#range.length);
   }
 
-  #setNum(n, col, row) {
-    if (typeof n !== "number") return;
+  #setNum(n, row, col) {
+    const notEditable = !this.#editablePositions.includes(`${row}-${col}`);
 
-    this.#editableFrames[col][row] = n;
+    if (typeof n !== "number" || notEditable)
+      return console.warn("You cannot edit this position!");
+
+    this.#editableFrames[row][col] = n;
     console.log(`Set ${n} at frame ${row} col ${col}`);
-    console.log(this.#editableFrames);
   }
 
   #removeNumbers(n) {
@@ -45,8 +48,9 @@ export default class Grid {
 
     // Set the corresponding elements to null
     for (const index of indices) {
-      const [i, j] = index.split(",");
-      this.editableFrames[i][j] = `${i}-${j}`;
+      const [row, col] = index.split(",");
+      this.#editableFrames[row][col] = `${row}-${col}`;
+      this.#editablePositions.push(`${row}-${col}`);
     }
   }
 

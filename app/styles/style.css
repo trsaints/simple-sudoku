@@ -6,12 +6,29 @@
   border-collapse: collapse;
 }
 
-.body__cell {
+.body__row:nth-child(3n) {
+  border-bottom: 4px solid;
+}
+
+.body__row:nth-child(3n - 2) {
+  border-top: 4px solid;
+}
+
+.body__row {
+  border-inline: 4px solid;
+}
+
+.row__cell {
   border: 1px solid;
+}
+
+.row__cell:nth-child(3n) {
+  border-right: 4px solid;
 }
 
 .cell__input {
   width: 24px;
   height: 24px;
   padding: 8px;
+  border: none;
 }
