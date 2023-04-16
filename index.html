@@ -22,7 +22,11 @@
         </button>
       </menu>
 
-      <dialog data-element="game-dialog" class="main__dialog hidden">
+      <dialog
+        data-element="game-dialog"
+        class="main__dialog hidden"
+        aria-hidden="true"
+      >
         <form data-element="game-form" novalidate class="dialog__form">
           <fieldset class="form__fieldset">
             <legend class="fieldset__title">Opções de Jogo</legend>
@@ -44,7 +48,7 @@
         </form>
       </dialog>
 
-      <article data-element="game" class="main__game hidden">
+      <article data-element="game" class="main__game hidden" aria-hidden="true">
         <output data-element="timer" class="game__timer"></output>
 
         <menu data-element="game-options" class="game__options">
@@ -52,7 +56,7 @@
             Validar Jogo
           </button>
 
-          <button data-element="reset" type="button" class="option__btn">
+          <button data-element="restart" type="button" class="option__btn">
             Reiniciar Jogo
           </button>
 
@@ -70,13 +74,21 @@
         </table>
       </article>
 
-      <section data-element="history" class="hidden">
+      <section data-element="history" class="hidden" aria-hidden="true">
         <h2>Histórico</h2>
 
-        <menu data-element="history-options"></menu>
+        <menu data-element="history-options">
+          <button data-element="reset" type="button">Limpar Histórico</button>
+        </menu>
 
         <table data-element="history-table"></table>
       </section>
+
+      <aside
+        data-element="previous-game"
+        class="hidden"
+        aria-hidden="true"
+      ></aside>
     </main>
 
     <footer>
