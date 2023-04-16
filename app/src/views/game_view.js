@@ -15,6 +15,7 @@ export function renderGame({ callbacks, components, game }) {
   callbacks.getElement("game-dialog").close();
   callbacks.hideElement("game-dialog");
   callbacks.hideElement("main-options");
+  callbacks.hideElement("previous-game");
   callbacks.showElement("game");
 
   difficulty.textContent = `Dificuldade: ${mode[game.difficulty]}`;
@@ -32,6 +33,24 @@ function updateTimer({ callbacks, game }) {
   if (invalid) setTimeout(() => updateTimer({ callbacks, game }), 1000);
 }
 
-export function finishGame({ callbacks, components, game}) {
-  callbacks.clearContent()
+export function clearGame({ callbacks, components, game = "" }) {
+  callbacks.clearContent("grid-content");
+
+  callbacks.showElement("game-dialog");
+  callbacks.showElement("main-options");
+  callbacks.hideElement("game");
+
+  if (!game) return;
+
+  showPreviousGame({ callbacks, components, game });
+}
+
+function showPreviousGame({ callbacks, components, game }) {
+  const score = new components.Score(game);
+  const scoreTable = new components.ScoreTable([score]);
+
+  callbacks.clearContent("previous-game");
+  callbacks.showElement("previous-game");
+
+  callbacks.getElement("previous-game").appendChild(scoreTable);
 }

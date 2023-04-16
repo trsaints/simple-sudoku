@@ -28,11 +28,7 @@ export function hideElement(element) {
 export function clearContent(element) {
   const target = getElement(element);
 
-  const { firstChild } = target;
-
-  console.log(target)
-
-  while (firstChild) target.removeChild(firstChild);
+  while (target.firstChild) target.removeChild(target.firstChild);
 }
 
 export function showPopup(message) {

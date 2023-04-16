@@ -3,9 +3,12 @@ export function startGame({ callbacks, components, mode }) {
 
   const play = (target) => {
     setNum({ game, target });
-    let valid = game.validate();
+    let invalid = !game.validate();
 
-    if (valid) document.removeEventListener(play);
+    if (invalid) return;
+
+    document.removeEventListener("input", play);
+    callbacks.clearGame({ callbacks, components, game });
   };
 
   callbacks.renderGame({ callbacks, components, game });
@@ -25,6 +28,4 @@ function setNum({ game, target }) {
     values = [num, ...position];
 
   game.grid.setNum(values[0], values[1], values[2]);
-
-  console.table(game.grid.editableFrames);
 }
