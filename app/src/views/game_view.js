@@ -2,8 +2,8 @@ export function renderGame({ callbacks, components, game }) {
   const grid = callbacks.getElement("grid-content"),
     difficulty = callbacks.getElement("grid-difficulty");
 
-  const stopButton = callbacks.getElement("quit");
-  const restartButton = callbacks.getElement("restart");
+  const stopButton = callbacks.getElement("quit"),
+    restartButton = callbacks.getElement("restart");
 
   const { Sudoku } = components;
 
@@ -21,11 +21,7 @@ export function renderGame({ callbacks, components, game }) {
   stopButton.removeEventListener("click", stopGame);
   restartButton.removeEventListener("click", cleanGame);
 
-  callbacks.getElement("game-dialog").close();
-  callbacks.hideElement("game-dialog");
-  callbacks.hideElement("main-options");
-  callbacks.hideElement("previous-game");
-  callbacks.showElement("game");
+  showGame({ callbacks });
 
   difficulty.textContent = `Dificuldade: ${mode[game.difficulty]}`;
   grid.appendChild(new Sudoku(game));
@@ -34,6 +30,28 @@ export function renderGame({ callbacks, components, game }) {
   restartButton.addEventListener("click", cleanGame);
 
   updateTimer({ callbacks, game });
+}
+
+function showGame({ callbacks }) {
+  callbacks.getElement("game-dialog").close();
+  callbacks.hideElement("game-dialog");
+  callbacks.hideElement("main-options");
+  callbacks.hideElement("previous-game");
+  callbacks.showElement("game");
+}
+
+export function updateCountTable({ callbacks, game }) {
+  const cells = callbacks.getElements("count");
+
+  const changeContent = (cell) => {
+    const { count } = cell.dataset;
+
+    const num = game.grid.editableValues[count];
+
+    cell.textContent = num;
+  };
+
+  cells.forEach(changeContent);
 }
 
 function updateTimer({ callbacks, game }) {
@@ -51,6 +69,8 @@ function resetGame({ callbacks, game }) {
   const editableCells = callbacks.getElements("game-cell");
 
   editableCells.forEach((cell) => (cell.value = ""));
+
+  updateCountTable({ callbacks, game });
 }
 
 export function clearGame({ callbacks, components, game }) {

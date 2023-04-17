@@ -8,7 +8,12 @@ export function startGame({ callbacks, components, mode }) {
     if (invalid) return;
 
     document.removeEventListener("input", play);
+    document.removeEventListener("input", update);
     callbacks.clearGame({ callbacks, components, game });
+  };
+
+  const update = () => {
+    callbacks.updateCountTable({ callbacks, game });
   };
 
   callbacks.renderGame({ callbacks, components, game });
@@ -16,6 +21,7 @@ export function startGame({ callbacks, components, mode }) {
   game.startCounter();
 
   document.addEventListener("input", play);
+  document.addEventListener("input", update);
 }
 
 function setNum({ game, target }) {

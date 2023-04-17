@@ -3,9 +3,24 @@ export default class Grid {
   #frames = [];
   #editableFrames = [];
   #editablePositions = [];
+  #editableValues = {
+    1: 0,
+    2: 0,
+    3: 0,
+    4: 0,
+    5: 0,
+    6: 0,
+    7: 0,
+    8: 0,
+    9: 0,
+  };
 
   get editableFrames() {
     return this.#editableFrames;
+  }
+
+  get editableValues() {
+    return this.#editableValues;
   }
 
   get reset() {
@@ -18,6 +33,25 @@ export default class Grid {
 
   get compare() {
     return this.#compare;
+  }
+
+  #updateCount() {
+    this.#clearCount();
+
+    for (const position of this.#editablePositions) {
+      const [row, col] = position.split("-");
+
+      const currentValue = this.#editableFrames[row][col];
+      const defined = this.#editableValues[currentValue] !== undefined;
+
+      if (defined) this.#editableValues[currentValue]++;
+    }
+  }
+
+  #clearCount() {
+    for (let value of this.#range) {
+      this.#editableValues[value + 1] = 0;
+    }
   }
 
   #compare() {
@@ -33,7 +67,7 @@ export default class Grid {
       this.editableFrames[row][col] = position;
     });
 
-    console.table(this.#editableFrames);
+    this.#updateCount();
   }
 
   #getRandom() {
@@ -46,10 +80,11 @@ export default class Grid {
     if (notEditable)
       return console.warn("Invalid input: cannot set such position");
 
-    if (isNaN(n) || n > 9)
+    if (isNaN(n) || n > 9 || n < 1)
       return console.warn("Invalid input: cannot set such value");
 
     this.#editableFrames[row][col] = n;
+    this.#updateCount();
     console.log(`Set ${n} at frame ${row} col ${col}`);
   }
 
