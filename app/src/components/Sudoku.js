@@ -7,7 +7,7 @@ export default class Sudoku {
     const sudoku = document.createDocumentFragment();
 
     editableFrames.map((row) => {
-      const tr = new DOMElement("tr", ['body__row']);
+      const tr = new DOMElement("tr", ["body__row"]);
 
       const rowIndex = editableFrames.indexOf(row);
 
@@ -26,6 +26,7 @@ export default class Sudoku {
           input.classList.add("filled");
         } else {
           input.setAttribute("data-cell", colPattern);
+          input.setAttribute("data-element", "game-cell");
         }
 
         input.value = col === colPattern ? "" : col;

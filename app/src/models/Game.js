@@ -35,8 +35,6 @@ export default class Game {
   #startCounter() {
     this.#timeElapsed += 1;
 
-    console.log(this.#timeElapsed)
-
     if (this.#status === "invalid" && this.#active === true)
       setTimeout(() => this.#startCounter(), 1000);
   }

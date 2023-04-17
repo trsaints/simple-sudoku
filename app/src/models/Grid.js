@@ -8,6 +8,10 @@ export default class Grid {
     return this.#editableFrames;
   }
 
+  get reset() {
+    return this.#reset;
+  }
+
   get setNum() {
     return this.#setNum;
   }
@@ -22,6 +26,16 @@ export default class Grid {
     );
   }
 
+  #reset() {
+    this.#editablePositions.forEach((position) => {
+      const [row, col] = position.split("-");
+
+      this.editableFrames[row][col] = position;
+    });
+
+    console.table(this.#editableFrames);
+  }
+
   #getRandom() {
     return Math.floor(Math.random() * this.#range.length);
   }
@@ -30,7 +44,7 @@ export default class Grid {
     const notEditable = !this.#editablePositions.includes(`${row}-${col}`);
 
     if (typeof n !== "number" || notEditable)
-      return console.warn("You cannot edit this position!");
+      return console.warn("Invalid inputs: cannot set such value or position");
 
     this.#editableFrames[row][col] = n;
     console.log(`Set ${n} at frame ${row} col ${col}`);
@@ -40,10 +54,10 @@ export default class Grid {
     // Generate `n` unique pairs of row and column indices
     const indices = new Set();
     while (indices.size < n) {
-      const i = this.#getRandom(),
-        j = this.#getRandom();
+      const row = this.#getRandom(),
+        col = this.#getRandom();
 
-      indices.add(`${i},${j}`);
+      indices.add(`${row},${col}`);
     }
 
     // Set the corresponding elements to null

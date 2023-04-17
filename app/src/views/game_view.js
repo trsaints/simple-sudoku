@@ -3,6 +3,7 @@ export function renderGame({ callbacks, components, game }) {
     difficulty = callbacks.getElement("grid-difficulty");
 
   const stopButton = callbacks.getElement("quit");
+  const restartButton = callbacks.getElement("restart");
 
   const { Sudoku } = components;
 
@@ -15,8 +16,10 @@ export function renderGame({ callbacks, components, game }) {
   };
 
   const stopGame = () => clearGame({ callbacks, components, game });
+  const cleanGame = () => resetGame({ callbacks, game });
 
   stopButton.removeEventListener("click", stopGame);
+  restartButton.removeEventListener("click", cleanGame);
 
   callbacks.getElement("game-dialog").close();
   callbacks.hideElement("game-dialog");
@@ -28,6 +31,7 @@ export function renderGame({ callbacks, components, game }) {
   grid.appendChild(new Sudoku(game));
 
   stopButton.addEventListener("click", stopGame);
+  restartButton.addEventListener("click", cleanGame);
 
   updateTimer({ callbacks, game });
 }
@@ -41,9 +45,15 @@ function updateTimer({ callbacks, game }) {
   if (invalid) setTimeout(() => updateTimer({ callbacks, game }), 1000);
 }
 
-export function clearGame({ callbacks, components, game }) {
-  const stopButton = callbacks.getElement("quit");
+function resetGame({ callbacks, game }) {
+  game.grid.reset();
 
+  const editableCells = callbacks.getElements("game-cell");
+
+  editableCells.forEach((cell) => (cell.value = ""));
+}
+
+export function clearGame({ callbacks, components, game }) {
   callbacks.clearContent("grid-content");
 
   callbacks.showElement("game-dialog");

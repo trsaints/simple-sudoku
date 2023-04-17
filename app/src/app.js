@@ -8,6 +8,7 @@ import { renderGame, clearGame } from "./views/game_view.js";
 import {
   showElement,
   getElement,
+  getElements,
   hideElement,
   clearContent,
 } from "./views/dom_view.js";
@@ -17,6 +18,7 @@ const deps = {
     showElement,
     clearGame,
     getElement,
+    getElements,
     hideElement,
     clearContent,
     renderGame,
