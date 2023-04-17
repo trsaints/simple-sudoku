@@ -43,8 +43,11 @@ export default class Grid {
   #setNum(n, row, col) {
     const notEditable = !this.#editablePositions.includes(`${row}-${col}`);
 
-    if (typeof n !== "number" || notEditable)
-      return console.warn("Invalid inputs: cannot set such value or position");
+    if (notEditable)
+      return console.warn("Invalid input: cannot set such position");
+
+    if (isNaN(n) || n > 9)
+      return console.warn("Invalid input: cannot set such value");
 
     this.#editableFrames[row][col] = n;
     console.log(`Set ${n} at frame ${row} col ${col}`);
