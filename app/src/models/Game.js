@@ -10,6 +10,7 @@ export default class Game {
   };
   #grid;
   #difficulty = "";
+  #active = null;
 
   get startCounter() {
     return this.#startCounter;
@@ -19,14 +20,24 @@ export default class Game {
     return this.#validate;
   }
 
+  get stop() {
+    return this.#stop;
+  }
+
   #setStatus(status) {
     this.#status = status;
+  }
+
+  #stop() {
+    this.#active = false;
   }
 
   #startCounter() {
     this.#timeElapsed += 1;
 
-    if (this.#status === "invalid")
+    console.log(this.#timeElapsed)
+
+    if (this.#status === "invalid" && this.#active === true)
       setTimeout(() => this.#startCounter(), 1000);
   }
 
@@ -49,6 +60,10 @@ export default class Game {
     return this.#status;
   }
 
+  get active() {
+    return this.#active;
+  }
+
   get timeElapsed() {
     return this.#timeElapsed;
   }
@@ -56,5 +71,6 @@ export default class Game {
   constructor(mode) {
     this.#difficulty = mode;
     this.#grid = new Grid(this.#mode[mode]);
+    this.#active = true;
   }
 }

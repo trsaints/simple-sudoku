@@ -2,6 +2,8 @@ export function renderGame({ callbacks, components, game }) {
   const grid = callbacks.getElement("grid-content"),
     difficulty = callbacks.getElement("grid-difficulty");
 
+  const stopButton = callbacks.getElement("quit");
+
   const { Sudoku } = components;
 
   callbacks.clearContent("grid-content");
@@ -12,6 +14,10 @@ export function renderGame({ callbacks, components, game }) {
     hard: "Difícil",
   };
 
+  const stopGame = () => clearGame({ callbacks, components, game });
+
+  stopButton.removeEventListener("click", stopGame);
+
   callbacks.getElement("game-dialog").close();
   callbacks.hideElement("game-dialog");
   callbacks.hideElement("main-options");
@@ -20,6 +26,8 @@ export function renderGame({ callbacks, components, game }) {
 
   difficulty.textContent = `Dificuldade: ${mode[game.difficulty]}`;
   grid.appendChild(new Sudoku(game));
+
+  stopButton.addEventListener("click", stopGame);
 
   updateTimer({ callbacks, game });
 }
@@ -33,14 +41,18 @@ function updateTimer({ callbacks, game }) {
   if (invalid) setTimeout(() => updateTimer({ callbacks, game }), 1000);
 }
 
-export function clearGame({ callbacks, components, game = "" }) {
+export function clearGame({ callbacks, components, game }) {
+  const stopButton = callbacks.getElement("quit");
+
   callbacks.clearContent("grid-content");
 
   callbacks.showElement("game-dialog");
   callbacks.showElement("main-options");
   callbacks.hideElement("game");
 
-  if (!game) return;
+  game.stop();
+
+  if (game.status === "invalid") return;
 
   showPreviousGame({ callbacks, components, game });
 }
