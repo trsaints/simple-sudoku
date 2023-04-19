@@ -8,7 +8,7 @@
   </head>
   <body>
     <main class="main">
-      <h1 class="main__title">Bem-vindo</h1>
+      <h1 class="main__title" data-element="title">Bem-vindo</h1>
 
       <menu data-element="main-options" class="main__options">
         <p class="option__desc">O que deseja fazer?</p>
@@ -109,7 +109,7 @@
       </article>
 
       <section data-element="history" class="hidden" aria-hidden="true">
-        <h2>Histórico</h2>
+        <h2>Minhas Partidas</h2>
 
         <menu data-element="history-options">
           <button data-element="reset" type="button">Limpar Histórico</button>
@@ -123,6 +123,10 @@
         class="hidden"
         aria-hidden="true"
       ></aside>
+
+      <aside data-element="popup" class="main__popup hidden" aria-hidden="true">
+        <p data-element="warn-message"></p>
+      </aside>
     </main>
 
     <footer>

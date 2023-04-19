@@ -32,15 +32,14 @@ export function clearContent(element) {
 }
 
 export function showPopup(message) {
-  const popup = getElement("popup");
   const warnMessage = getElement("warn-message");
 
-  const reset = () => hideElement(popup);
+  const reset = () => hideElement("popup");
   clearTimeout(reset);
 
   warnMessage.textContent = message;
 
-  showElement(popup);
+  showElement("popup");
 
   setTimeout(reset, 3000);
 }

@@ -13,10 +13,15 @@ function init({ callbacks, components, database }) {
 
       const game = new components.Game(difficulty.value);
 
+      callbacks.getElement("title").textContent = "Novo Jogo";
       callbacks.startGame({ callbacks, components, game });
     },
     list: () => {
+      callbacks.getElement("title").textContent = "Histórico";
       callbacks.showHistory({ callbacks, components });
+    },
+    reset: () => {
+      callbacks.resetHistory({ callbacks, database });
     },
   };
 

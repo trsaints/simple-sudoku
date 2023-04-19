@@ -11,6 +11,7 @@ import {
   getElements,
   hideElement,
   clearContent,
+  showPopup
 } from "./views/dom_view.js";
 import {
   addScore,
@@ -19,7 +20,7 @@ import {
   getScores,
   gameDB,
 } from "./services/database_service.js";
-import { showHistory } from "./views/history_view.js";
+import { showHistory, resetHistory } from "./views/history_view.js";
 
 const deps = {
   callbacks: {
@@ -36,7 +37,9 @@ const deps = {
     clearHistory,
     getScores,
     addScore,
-    showHistory
+    resetHistory,
+    showHistory,
+    showPopup
   },
   components: {
     Game,

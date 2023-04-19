@@ -86,6 +86,8 @@ export function finishGame({ callbacks, components, game }) {
 
   game.stop();
 
+  callbacks.getElement("title").textContent = "Bem Vindo";
+
   if (game.status === "invalid") return;
 
   const score = new components.Score(game);
