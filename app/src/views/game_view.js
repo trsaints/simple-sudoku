@@ -73,6 +73,7 @@ function resetGame({ callbacks, game }) {
 
   editableCells.forEach((cell) => (cell.value = ""));
 
+  clearValidation(callbacks);
   updateCountTable({ callbacks, game });
 }
 
@@ -121,7 +122,8 @@ function getCell(position) {
 function clearValidation(callbacks) {
   const cells = callbacks.getElements("game-cell");
 
-  cells.forEach((cell) =>
-    cell.classList.contains("invalid") ? cell.classList.remove("invalid") : ""
-  );
+  const clear = (cell) =>
+    cell.classList.contains("invalid") ? cell.classList.remove("invalid") : "";
+
+  cells.forEach(clear);
 }
