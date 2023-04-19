@@ -35,6 +35,27 @@ export default class Grid {
     return this.#compare;
   }
 
+  get validatePositions() {
+    return this.#validatePositions;
+  }
+
+  #validatePositions() {
+    const invalidPositions = [];
+
+    for (const position of this.#editablePositions) {
+      const [row, col] = position.split("-");
+
+      const ref = this.#frames[row][col],
+        target = this.#editableFrames[row][col];
+
+      if (target !== ref) invalidPositions.push(position);
+    }
+
+    if (invalidPositions.length === 0) return;
+
+    return invalidPositions;
+  }
+
   #updateCount() {
     this.#clearCount();
 
@@ -74,7 +95,7 @@ export default class Grid {
     return Math.floor(Math.random() * this.#range.length);
   }
 
-  #setNum(n, row, col) {
+  #setNum([n, row, col]) {
     const notEditable = !this.#editablePositions.includes(`${row}-${col}`);
 
     if (notEditable)

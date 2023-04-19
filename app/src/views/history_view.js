@@ -1,5 +1,6 @@
-export async function showHistory({ callbacks, components, database }) {
+export async function showHistory({ callbacks, components }) {
   const scores = await callbacks.getScores();
+  
   callbacks.showElement("history");
   callbacks.hideElement("main-options");
   callbacks.hideElement('previous-game')

@@ -16,8 +16,8 @@ export default class Game {
     return this.#startCounter;
   }
 
-  get validate() {
-    return this.#validate;
+  get compare() {
+    return this.#compare;
   }
 
   get stop() {
@@ -39,7 +39,7 @@ export default class Game {
       setTimeout(() => this.#startCounter(), 1000);
   }
 
-  #validate() {
+  #compare() {
     if (!this.#grid.compare()) return false;
 
     this.#setStatus("valid");

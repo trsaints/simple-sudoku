@@ -4,7 +4,7 @@ import Sudoku from "./components/Sudoku.js";
 import Score from "./models/Score.js";
 import ScoreTable from "./components/ScoreTable.js";
 import { startGame } from "./services/game_service.js";
-import { renderGame, clearGame, updateCountTable } from "./views/game_view.js";
+import { renderGame, finishGame, updateCountTable } from "./views/game_view.js";
 import {
   showElement,
   getElement,
@@ -24,7 +24,7 @@ import { showHistory } from "./views/history_view.js";
 const deps = {
   callbacks: {
     showElement,
-    clearGame,
+    finishGame,
     getElement,
     getElements,
     hideElement,

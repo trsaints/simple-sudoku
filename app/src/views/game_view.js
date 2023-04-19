@@ -3,7 +3,8 @@ export function renderGame({ callbacks, components, game }) {
     difficulty = callbacks.getElement("grid-difficulty");
 
   const stopButton = callbacks.getElement("quit"),
-    restartButton = callbacks.getElement("restart");
+    restartButton = callbacks.getElement("restart"),
+    validateButton = callbacks.getElement("validate");
 
   const { Sudoku } = components;
 
@@ -15,19 +16,21 @@ export function renderGame({ callbacks, components, game }) {
     hard: "Difícil",
   };
 
-  const stopGame = () => clearGame({ callbacks, components, game });
-  const cleanGame = () => resetGame({ callbacks, game });
+  const stop = () => finishGame({ callbacks, components, game });
+  const clear = () => resetGame({ callbacks, game });
+  const validate = () => showInvalidPositions({ callbacks, game });
 
-  stopButton.removeEventListener("click", stopGame);
-  restartButton.removeEventListener("click", cleanGame);
+  stopButton.removeEventListener("click", stop);
+  restartButton.removeEventListener("click", clear);
 
   showGame({ callbacks });
 
   difficulty.textContent = `Dificuldade: ${mode[game.difficulty]}`;
   grid.appendChild(new Sudoku(game));
 
-  stopButton.addEventListener("click", stopGame);
-  restartButton.addEventListener("click", cleanGame);
+  stopButton.addEventListener("click", stop);
+  restartButton.addEventListener("click", clear);
+  validateButton.addEventListener("click", validate);
 
   updateTimer({ callbacks, game });
 }
@@ -56,7 +59,7 @@ export function updateCountTable({ callbacks, game }) {
 
 function updateTimer({ callbacks, game }) {
   const timer = callbacks.getElement("timer");
-  const invalid = !game.validate();
+  const invalid = !game.compare();
 
   timer.textContent = `${game.timeElapsed}s`;
 
@@ -73,7 +76,7 @@ function resetGame({ callbacks, game }) {
   updateCountTable({ callbacks, game });
 }
 
-export function clearGame({ callbacks, components, game }) {
+export function finishGame({ callbacks, components, game }) {
   callbacks.clearContent("grid-content");
 
   callbacks.showElement("game-dialog");
@@ -97,4 +100,28 @@ function showPreviousGame({ callbacks, components, score }) {
   callbacks.showElement("previous-game");
 
   callbacks.getElement("previous-game").appendChild(scoreTable);
+}
+
+function showInvalidPositions({ callbacks, game }) {
+  const invalidPositions = game.grid.validatePositions();
+
+  clearValidation(callbacks);
+
+  invalidPositions.forEach((position) => {
+    const invalidCell = getCell(position);
+
+    invalidCell.classList.add("invalid");
+  });
+}
+
+function getCell(position) {
+  return document.querySelector(`[data-cell="${position}"]`);
+}
+
+function clearValidation(callbacks) {
+  const cells = callbacks.getElements("game-cell");
+
+  cells.forEach((cell) =>
+    cell.classList.contains("invalid") ? cell.classList.remove("invalid") : ""
+  );
 }

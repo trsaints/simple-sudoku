@@ -1,13 +1,13 @@
 export function startGame({ callbacks, components, game }) {
   const play = (target) => {
     setNum({ game, target });
-    let invalid = !game.validate();
+    let invalid = !game.compare();
 
     if (invalid) return;
 
     document.removeEventListener("input", play);
     document.removeEventListener("input", update);
-    callbacks.clearGame({ callbacks, components, game });
+    callbacks.finishGame({ callbacks, components, game });
   };
 
   const update = () => {
@@ -31,5 +31,5 @@ function setNum({ game, target }) {
     num = +target.target.value,
     values = [num, ...position];
 
-  game.grid.setNum(values[0], values[1], values[2]);
+  game.grid.setNum(values);
 }

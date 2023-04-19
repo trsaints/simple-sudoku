@@ -16,7 +16,7 @@ function init({ callbacks, components, database }) {
       callbacks.startGame({ callbacks, components, game });
     },
     list: () => {
-      callbacks.showHistory({ callbacks, components, database });
+      callbacks.showHistory({ callbacks, components });
     },
   };
 
