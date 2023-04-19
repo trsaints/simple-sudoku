@@ -84,11 +84,13 @@ export function clearGame({ callbacks, components, game }) {
 
   if (game.status === "invalid") return;
 
-  showPreviousGame({ callbacks, components, game });
+  const score = new components.Score(game);
+  callbacks.addScore(score);
+
+  showPreviousGame({ callbacks, components, score });
 }
 
-function showPreviousGame({ callbacks, components, game }) {
-  const score = new components.Score(game);
+function showPreviousGame({ callbacks, components, score }) {
   const scoreTable = new components.ScoreTable([score]);
 
   callbacks.clearContent("previous-game");

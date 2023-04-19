@@ -12,6 +12,13 @@ import {
   hideElement,
   clearContent,
 } from "./views/dom_view.js";
+import {
+  addScore,
+  clearHistory,
+  configureDB,
+  getScores,
+  gameDB,
+} from "./services/database_service.js";
 
 const deps = {
   callbacks: {
@@ -23,15 +30,19 @@ const deps = {
     clearContent,
     renderGame,
     startGame,
-    updateCountTable
+    updateCountTable,
+    configureDB,
+    clearHistory,
+    getScores,
+    addScore,
   },
   components: {
     Game,
     Sudoku,
     Score,
-    ScoreTable
+    ScoreTable,
   },
-  database: {},
+  database: gameDB,
 };
 
 initialize(deps);

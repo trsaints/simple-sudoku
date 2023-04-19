@@ -11,13 +11,19 @@ function init({ callbacks, components, database }) {
     start: () => {
       const { difficulty } = callbacks.getElement("game-form").elements;
 
-      callbacks.startGame({ callbacks, components, mode: difficulty.value });
+      const game = new components.Game(difficulty.value)
+
+      callbacks.startGame({ callbacks, components, game });
     },
   };
 
   listenActions(actions);
   hideOnKeydown(callbacks);
   removeSubmitEvent(callbacks);
+
+  if (database.checkPreload()) return;
+
+  callbacks.configureDB();
 }
 
 function listenActions(actions) {

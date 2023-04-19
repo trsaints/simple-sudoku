@@ -1,6 +1,4 @@
-export function startGame({ callbacks, components, mode }) {
-  const game = new components.Game(mode);
-
+export function startGame({ callbacks, components, game }) {
   const play = (target) => {
     setNum({ game, target });
     let invalid = !game.validate();

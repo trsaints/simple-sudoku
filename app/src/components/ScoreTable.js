@@ -36,16 +36,21 @@ export default class ScoreTable {
   }
 
   #generateRow({ timeElapsed, date, difficulty }) {
-    const tr = new DOMElement("tr", ["score__row"]);
-    const timeCell = new DOMElement("td", ["row__cell"]),
+    const tr = new DOMElement("tr", ["score__row"]),
+      timeCell = new DOMElement("td", ["row__cell"]),
       dateCell = new DOMElement("td", ["row__cell"]),
       modeCell = new DOMElement("td", ["row__cell"]);
-
     const time = new DOMElement("time", ["cell__time"]);
+
+    const mode = {
+      easy: "Fácil",
+      medium: "Média",
+      hard: "Difícil",
+    };
 
     timeCell.textContent = `${timeElapsed}s`;
     time.textContent = date;
-    modeCell.textContent = difficulty;
+    modeCell.textContent = mode[difficulty];
 
     dateCell.appendChild(time);
 
