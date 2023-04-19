@@ -5,8 +5,8 @@ export default class Game {
   #timeElapsed = 0;
   #mode = {
     easy: 24,
-    medium: 48,
-    hard: 56,
+    medium: 36,
+    hard: 48,
   };
   #grid;
   #difficulty = "";

@@ -11,9 +11,12 @@ function init({ callbacks, components, database }) {
     start: () => {
       const { difficulty } = callbacks.getElement("game-form").elements;
 
-      const game = new components.Game(difficulty.value)
+      const game = new components.Game(difficulty.value);
 
       callbacks.startGame({ callbacks, components, game });
+    },
+    list: () => {
+      callbacks.showHistory({ callbacks, components, database });
     },
   };
 

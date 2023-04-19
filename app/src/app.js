@@ -19,6 +19,7 @@ import {
   getScores,
   gameDB,
 } from "./services/database_service.js";
+import { showHistory } from "./views/history_view.js";
 
 const deps = {
   callbacks: {
@@ -35,6 +36,7 @@ const deps = {
     clearHistory,
     getScores,
     addScore,
+    showHistory
   },
   components: {
     Game,
