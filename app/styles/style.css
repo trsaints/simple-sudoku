@@ -1,38 +1,242 @@
-.hidden {
-  display: none;
+@import url("./reset.css");
+
+@font-face {
+  font-family: "Josefin";
+  src: url("../../public/fonts/Josefin_Sans/JosefinSans-VariableFont_wght.ttf");
 }
 
-.game__grid {
+:root {
+  --c-licorice: hsl(334, 11%, 12%);
+  --c-licorice-l: hsl(334, 11%, 17%);
+  --c-licorice-ls: hsl(334, 11%, 22%);
+  --c-flax: hsl(46, 83%, 76%);
+  --c-flax-l: hsl(46, 83%, 81%);
+  --c-flax-ls: hsl(46, 83%, 86%);
+  --c-black: hsl(240, 2%, 5%);
+  --c-black-l: hsl(240, 2%, 7%);
+  --c-black-ls: hsl(240, 2%, 10%);
+}
+
+body,
+input,
+button,
+select {
+  font-family: "Josefin";
+}
+
+body {
+  display: grid;
+  grid-template-areas: "game" "about";
+  min-height: 100vh;
+}
+
+.main {
+  grid-area: game;
+  font-size: 1.25rem;
+  background-color: var(--c-flax-ls);
+  padding: 5rem 1.5rem 10rem;
+  display: grid;
+  position: relative;
+  justify-content: center;
+}
+
+.main__popup {
+  display: grid;
+  position: fixed;
+  top: 1rem;
+  background-color: var(--c-flax);
+  padding: 0.5rem 1rem;
+  justify-self: center;
+  border: 2px solid;
+  z-index: 100;
+}
+
+.main__title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 2rem;
+  border-bottom: 8px double;
+  text-align: center;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.main__dialog {
+  border: none;
+  border-radius: 8px;
+  background-color: var(--c-flax-ls);
+}
+.fieldset__title {
+  text-align: center;
+  width: 100%;
+  margin-bottom: 1rem;
+  font-weight: bold;
+}
+
+.form__submit {
+  padding: 0.5rem 1rem;
+  font-size: 1.125rem;
+  background-color: var(--c-licorice);
+  border: none;
+  color: var(--c-flax-ls);
+  border-radius: 4px;
+  justify-self: center;
+}
+
+.fieldset__input {
+  background-color: var(--c-licorice);
+  border: none;
+  padding: 0.5rem 1rem;
+  color: var(--c-flax-ls);
+  border-radius: 4px;
+}
+
+.dialog__form {
+  display: grid;
+  gap: 1rem;
+}
+
+.main__game {
+  display: grid;
+  gap: 2rem;
+}
+
+.game__timer {
+  border-radius: 50%;
+  width: 4.5rem;
+  height: 4.5rem;
+  display: grid;
+  text-align: center;
+  background-color: var(--c-licorice-ls);
+  color: var(--c-flax-ls);
+  align-items: center;
+  justify-self: center;
+}
+
+.game__grid,
+.game__numbers {
   border-collapse: collapse;
 }
 
-.body__row:nth-child(3n) {
+.grid__mode,
+.numbers__title {
+  margin-bottom: 2rem;
+}
+
+.game__grid .body__row:nth-child(3n) {
   border-bottom: 4px solid;
 }
 
-.body__row:nth-child(3n - 2) {
+.game__grid .body__row:nth-child(3n - 2) {
   border-top: 4px solid;
 }
 
-.body__row {
+.game__grid .body__row {
   border-inline: 4px solid;
 }
 
-.row__cell {
-  border: 1px solid;
+.row__header {
+  background-color: var(--c-licorice);
+  color: var(--c-flax-ls);
+  font-size: 1rem;
+  padding: 0.5rem;
 }
 
-.row__cell:nth-child(3n) {
+.row__header:first-child {
+  border-bottom: 1px solid;
+}
+
+.row__cell,
+.row__cell--editable {
+  border: 1px solid;
+  padding: 0.25rem;
+}
+
+.row__cell .cell__input {
+  background-color: var(--c-black-ls);
+  color: var(--c-flax-ls);
+}
+
+.row__cell--editable .cell__input {
+  background-color: transparent;
+}
+
+.game__grid .row__cell:nth-child(3n),
+.row__cell--editable:nth-child(3n) {
   border-right: 4px solid;
 }
 
 .cell__input {
-  width: 24px;
-  height: 24px;
-  padding: 8px;
+  width: 1.5rem;
+  height: 1.5rem;
+  padding: 0.5rem;
   border: none;
+  border-radius: 50%;
+  font-weight: bold;
+  text-align: center;
 }
 
 .cell__input.invalid {
-  background-color: red;
+  background-color: coral;
+}
+
+.main__scores {
+  display: grid;
+  gap: 2rem;
+}
+
+.scores__title {
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+
+.row__heading {
+  background-color: var(--c-licorice);
+  padding: 0.5rem;
+  color: var(--c-flax-ls);
+}
+
+.row__heading + .row__heading {
+  border-left: 1px solid white;
+}
+.score__row:nth-child(even) {
+  background-color: var(--c-flax);
+}
+
+[class*="__options"] {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.options__desc {
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.options__btn {
+  padding: 0.5rem 1rem;
+  background-color: var(--c-licorice);
+  color: var(--c-flax-ls);
+  border-radius: 4px;
+  border: none;
+  font-size: 1.25rem;
+}
+
+.footer {
+  grid-area: about;
+  background-color: var(--c-licorice);
+  color: var(--c-flax-ls);
+  padding: 2.5rem 1.5rem;
+  text-align: center;
+}
+
+.footer__title {
+  font-size: 1.2rem;
+  margin-bottom: 1.5rem;
+}
+
+.desc__link {
+  color: coral;
 }

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -8,16 +8,16 @@
   </head>
   <body>
     <main class="main">
-      <h1 class="main__title" data-element="title">Bem-vindo</h1>
+      <h1 data-element="title" class="main__title">Bem-vindo</h1>
 
       <menu data-element="main-options" class="main__options">
-        <p class="option__desc">O que deseja fazer?</p>
+        <p class="options__desc">O que deseja fazer?</p>
 
-        <button data-element="show" type="button" class="options_btn">
+        <button data-element="show" type="button" class="options__btn">
           Novo Jogo
         </button>
 
-        <button data-element="list" type="button" class="options_btn">
+        <button data-element="list" type="button" class="options__btn">
           Histórico
         </button>
       </menu>
@@ -48,22 +48,8 @@
         </form>
       </dialog>
 
-      <article data-element="game" class="main__game hidden" aria-hidden="true">
+      <article data-element="game" aria-hidden="true" class="main__game hidden">
         <output data-element="timer" class="game__timer"></output>
-
-        <menu data-element="game-options" class="game__options">
-          <button data-element="validate" type="button" class="option__btn">
-            Validar Jogo
-          </button>
-
-          <button data-element="restart" type="button" class="option__btn">
-            Reiniciar Jogo
-          </button>
-
-          <button data-element="quit" type="button" class="option__btn">
-            Desistir
-          </button>
-        </menu>
 
         <table data-element="grid" class="game__grid">
           <caption data-element="grid-difficulty" class="grid__mode">
@@ -73,71 +59,92 @@
           <tbody data-element="grid-content" class="grid__body"></tbody>
         </table>
 
-        <table>
-          <caption>
+        <table class="game__numbers">
+          <caption class="numbers__title">
             Números do Jogo
           </caption>
 
-          <tbody>
-            <tr>
-              <th>Número</th>
-              <td>1</td>
-              <td>2</td>
-              <td>3</td>
-              <td>4</td>
-              <td>5</td>
-              <td>6</td>
-              <td>7</td>
-              <td>8</td>
-              <td>9</td>
+          <tbody class="numbers__grid">
+            <tr class="grid__row">
+              <th class="row__header">Número</th>
+              <td class="row__cell">1</td>
+              <td class="row__cell">2</td>
+              <td class="row__cell">3</td>
+              <td class="row__cell">4</td>
+              <td class="row__cell">5</td>
+              <td class="row__cell">6</td>
+              <td class="row__cell">7</td>
+              <td class="row__cell">8</td>
+              <td class="row__cell">9</td>
             </tr>
 
-            <tr>
-              <th>Quantidade</th>
-              <td data-element="count" data-count="1">0</td>
-              <td data-element="count" data-count="2">0</td>
-              <td data-element="count" data-count="3">0</td>
-              <td data-element="count" data-count="4">0</td>
-              <td data-element="count" data-count="5">0</td>
-              <td data-element="count" data-count="6">0</td>
-              <td data-element="count" data-count="7">0</td>
-              <td data-element="count" data-count="8">0</td>
-              <td data-element="count" data-count="9">0</td>
+            <tr class="grid__row">
+              <th class="row__header">Quantidade</th>
+              <td data-element="count" data-count="1" class="row__cell">0</td>
+              <td data-element="count" data-count="2" class="row__cell">0</td>
+              <td data-element="count" data-count="3" class="row__cell">0</td>
+              <td data-element="count" data-count="4" class="row__cell">0</td>
+              <td data-element="count" data-count="5" class="row__cell">0</td>
+              <td data-element="count" data-count="6" class="row__cell">0</td>
+              <td data-element="count" data-count="7" class="row__cell">0</td>
+              <td data-element="count" data-count="8" class="row__cell">0</td>
+              <td data-element="count" data-count="9" class="row__cell">0</td>
             </tr>
           </tbody>
         </table>
+
+        <menu data-element="game-options" class="game__options">
+          <button data-element="validate" type="button" class="options__btn">
+            Validar Jogo
+          </button>
+
+          <button data-element="restart" type="button" class="options__btn">
+            Reiniciar Jogo
+          </button>
+
+          <button data-element="quit" type="button" class="options__btn">
+            Desistir
+          </button>
+        </menu>
       </article>
 
-      <section data-element="history" class="hidden" aria-hidden="true">
-        <h2>Minhas Partidas</h2>
+      <section
+        data-element="history"
+        aria-hidden="true"
+        class="main__scores hidden"
+      >
+        <h2 class="scores__title">Minhas Partidas</h2>
 
-        <menu data-element="history-options">
-          <button data-element="reset" type="button">Limpar Histórico</button>
+        <menu data-element="history-options" class="scores__options">
+          <button data-element="reset" type="button" class="options__btn">
+            Limpar Histórico
+          </button>
         </menu>
 
-        <div data-element="history-table"></div>
+        <div data-element="history-table" class="scores__table"></div>
       </section>
 
       <aside
         data-element="previous-game"
-        class="hidden"
         aria-hidden="true"
+        class="main__previous-game hidden"
       ></aside>
 
-      <aside data-element="popup" class="main__popup hidden" aria-hidden="true">
-        <p data-element="warn-message"></p>
+      <aside data-element="popup" aria-hidden="true" class="main__popup hidden">
+        <p data-element="warn-message" class="popup__message"></p>
       </aside>
     </main>
 
-    <footer>
-      <h2>Simple Sudoku ─ 2023</h2>
+    <footer class="footer">
+      <h2 class="footer__title">Simple Sudoku ─ 2023</h2>
 
-      <p>
+      <p class="footer__desc">
         Feito por
         <a
           target="_blank"
           rel="noopener"
           href="https://github.com/trsaints/simple-sudoku/"
+          class="desc__link"
           >@trsaints</a
         >
       </p>

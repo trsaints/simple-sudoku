@@ -15,7 +15,11 @@ export default class Sudoku {
         const colIndex = row.indexOf(col),
           colPattern = `${rowIndex}-${colIndex}`;
 
-        const cell = new DOMElement("td", ["row__cell"]);
+        const cellClass =
+          col === colPattern ? "row__cell--editable" : "row__cell";
+        const cellContent = col === colPattern ? "" : col;
+
+        const cell = new DOMElement("td", [cellClass]);
         const input = new DOMElement("input", ["cell__input"]);
 
         input.setAttribute("type", "tel");
@@ -29,7 +33,7 @@ export default class Sudoku {
           input.setAttribute("data-element", "game-cell");
         }
 
-        input.value = col === colPattern ? "" : col;
+        input.value = cellContent;
 
         cell.appendChild(input);
         tr.appendChild(cell);

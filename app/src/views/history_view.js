@@ -25,4 +25,5 @@ export function resetHistory({ callbacks, database }) {
   database.reset();
 
   callbacks.showPopup("Histórico apagado com sucesso!");
+  setTimeout(() => window.location.reload(), 1500);
 }
