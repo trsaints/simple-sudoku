@@ -101,9 +101,18 @@ body {
 .main__game {
   display: grid;
   gap: 2rem;
+  padding-top: 4rem;
+  grid-template-areas: "timer" "game" "counting" "options";
 }
 
 .game__timer {
+  grid-area: timer;
+  display: grid;
+  justify-content: center;
+  gap: .5rem;
+}
+
+.timer__count {
   border-radius: 50%;
   width: 4.5rem;
   height: 4.5rem;
@@ -113,6 +122,18 @@ body {
   color: var(--c-flax-ls);
   align-items: center;
   justify-self: center;
+}
+
+.game__grid {
+  grid-area: game;
+}
+
+.game__numbers {
+  grid-area: counting;
+}
+
+.game__options {
+  grid-area: options;
 }
 
 .game__grid,
@@ -224,6 +245,10 @@ body {
   font-size: 1.25rem;
 }
 
+.main__previous-game {
+  padding-top: 3rem;
+}
+
 .footer {
   grid-area: about;
   background-color: var(--c-licorice);
@@ -239,4 +264,15 @@ body {
 
 .desc__link {
   color: coral;
+}
+
+@media screen and (min-width: 1024px) {
+  .main__game {
+    grid-template-areas: "timer timer" "game counting" "game options";
+  }
+  
+  .game__options {
+    max-height: 120px;
+    align-self: center;
+  }
 }

@@ -1,5 +1,5 @@
 import DOMElement from "./DOMElement.js";
-
+import Icon from "./Icon.js";
 export default class ScoreTable {
   #generateHeading() {
     const thead = new DOMElement("thead", ["score__heading"]);
@@ -9,9 +9,20 @@ export default class ScoreTable {
       dateHeading = new DOMElement("th", ["row__heading"]),
       modeHeading = new DOMElement("th", ["row__heading"]);
 
-    timeHeading.textContent = "Tempo";
-    dateHeading.textContent = "Data";
-    modeHeading.textContent = "Dificuldade";
+    const timeText = document.createTextNode("Tempo "),
+      dateText = document.createTextNode("Data "),
+      modeText = document.createTextNode("Dificuldade ");
+
+    const timeIcon = new Icon("stopwatch"),
+      dateIcon = new Icon("calendar"),
+      modeIcon = new Icon("info-circle");
+
+    timeHeading.appendChild(timeText);
+    timeHeading.appendChild(timeIcon);
+    dateHeading.appendChild(dateText);
+    dateHeading.appendChild(dateIcon);
+    modeHeading.appendChild(modeText);
+    modeHeading.appendChild(modeIcon);
 
     tr.appendChild(timeHeading);
     tr.appendChild(dateHeading);
