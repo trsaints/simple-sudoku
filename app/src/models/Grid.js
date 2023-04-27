@@ -57,22 +57,19 @@ export default class Grid {
   }
 
   #updateCount() {
-    this.#clearCount();
+    const result = [];
 
-    for (const position of this.#editablePositions) {
-      const [row, col] = position.split("-");
-
-      const currentValue = this.#editableFrames[row][col];
-      const defined = this.#editableValues[currentValue] !== undefined;
-
-      if (defined) this.#editableValues[currentValue]++;
+    for (const row of this.#editableFrames) {
+      result.push(...row);
     }
-  }
 
-  #clearCount() {
-    for (let value of this.#range) {
-      this.#editableValues[value + 1] = 0;
+    for (const n of this.#range) {
+      const count = result.filter(target => target === n + 1);
+
+      this.#editableValues[n + 1] = count.length;
     }
+
+    console.table(this.#editableValues);
   }
 
   #compare() {
@@ -146,6 +143,7 @@ export default class Grid {
     }
 
     this.#removeNumbers(mode);
+    this.#updateCount();
   }
 
   #setFrames() {

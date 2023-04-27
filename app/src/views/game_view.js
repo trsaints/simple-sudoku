@@ -32,6 +32,8 @@ export function renderGame({ callbacks, components, game }) {
   restartButton.addEventListener("click", clear);
   validateButton.addEventListener("click", validate);
 
+  updateCountTable({ callbacks, game });
+
   updateTimer({ callbacks, game });
 }
 
